@@ -1,5 +1,5 @@
 // Auto-generated R2 folder mapping
-// Generated: 2025-07-16T14:06:37.462Z
+// Generated: 2025-07-16T14:26:59.132Z
 // Folders: 35 | Images: 291 | R2: 263 | Fallback: 28
 
 export const R2_FOLDER_MAPPING: Record<string, string[]> = {
