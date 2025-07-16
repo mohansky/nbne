@@ -9,9 +9,6 @@ if (!process.env.VELITE_STARTED && (isDev || isBuild)) {
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: { ignoreBuildErrors: true },
-  experimental: {
-    instrumentationHook: false, // Disable instrumentation
-  },
   images: {
     remotePatterns: [
       {
@@ -22,16 +19,38 @@ const nextConfig = {
       },
     ],
   },
-  // Additional webpack config to exclude instrumentation
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.resolve.alias = {
-        ...config.resolve.alias,
-        './instrumentation': false,
-        './instrumentation.js': false,
-        './instrumentation.ts': false,
+  // Webpack config to exclude instrumentation completely
+  webpack: (config ) => {
+    // Exclude instrumentation from both client and server bundles
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      './instrumentation': false,
+      './instrumentation.js': false,
+      './instrumentation.ts': false,
+      '../instrumentation': false,
+      '../instrumentation.js': false,
+      '../instrumentation.ts': false,
+    };
+    
+    // Exclude instrumentation from module resolution
+    config.externals = config.externals || [];
+    if (typeof config.externals === 'function') {
+      const originalExternals = config.externals;
+      config.externals = (context, request, callback) => {
+        if (request.includes('instrumentation')) {
+          return callback(null, 'commonjs ' + request);
+        }
+        return originalExternals(context, request, callback);
       };
+    } else {
+      config.externals.push(({ request }) => {
+        if (request && request.includes('instrumentation')) {
+          return 'commonjs ' + request;
+        }
+        return false;
+      });
     }
+    
     return config;
   },
 };

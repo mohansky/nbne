@@ -3,7 +3,7 @@ name = "nbne"
 compatibility_date = "2025-03-25"
 compatibility_flags = ["nodejs_compat"]
 
-[[assets]]
+[assets]
 directory = ".open-next/assets"
 binding = "ASSETS"
 
