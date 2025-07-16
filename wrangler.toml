@@ -5,3 +5,5 @@
   [assets]
   directory = ".open-next/assets"
   binding = "ASSETS"
+  [vars]
+  NEXT_PUBLIC_SITE_URL = "https://nbne.mohansky.workers.dev"
