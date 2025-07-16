@@ -23,8 +23,7 @@ export default function Navbar() {
             return (
               <NavigationMenuItem key={item.id} className="bg-transparent">
                 <Link
-                  href={item.href}
-                  legacyBehavior
+                  href={item.href} 
                   passHref
                   title={item.title}
                 >

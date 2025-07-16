@@ -42,7 +42,7 @@ export default function HamburgerMenu() {
                   if (!item.children)
                     return (
                       <NavigationMenuItem key={item.id} className="my-5">
-                        <Link href={item.href} legacyBehavior passHref title={item.title}>
+                        <Link href={item.href} passHref title={item.title}>
                           <NavigationMenuLink
                             className={navigationMenuTriggerStyle()}
                           >
