@@ -37,8 +37,8 @@ export async function sendContactEmail(
 
     // Send email using Resend
     const { error } = await resend.emails.send({
-      from: process.env.RESEND_FROM_EMAIL!, // Replace with your verified domain
-      to: "mohansky@gmail.com",
+      from: process.env.RESEND_FROM_EMAIL!,
+      to: [`${process.env.RESEND_FROM_EMAIL!}`, "mohansky@gmail.com"],
       subject: `Contact Form: ${subject}`,
       react: ContactEmail({
         name: fname,

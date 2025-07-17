@@ -1,4 +1,5 @@
 import About from "@/components/page-sections/about";
+// import AboutAlt from "@/components/page-sections/aboutalt";
 import CTA from "@/components/page-sections/cta";
 import HeroMain from "@/components/page-sections/hero-main";
 import Region from "@/components/page-sections/region";
@@ -12,6 +13,7 @@ export default function Home() {
       <HeroMain />
       <TourTypes />
       <ToursSlider />
+      {/* <AboutAlt /> */}
       <About />
       <Region />
       <CTA />

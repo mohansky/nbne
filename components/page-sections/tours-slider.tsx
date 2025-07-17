@@ -1,5 +1,5 @@
 "use client";
-import TourSliderCard from "@/components/tours/tours-list/tour-itin-slider-card"; 
+import TourSliderCard from "@/components/tours/tours-list/tour-itin-slider-card";
 import {
   Carousel,
   CarouselContent,
@@ -36,7 +36,7 @@ export default function ToursSlider() {
           {departureTours.map((tour, index) => (
             <CarouselItem
               key={index}
-              className="pl-0.5 basis-full md:basis-1/2 lg:basis-1/3 xl:basis-1/3"
+              className="basis-full md:basis-1/2 lg:basis-1/3 xl:basis-1/3"
             >
               <TourSliderCard
                 slugAsParams={tour.slugAsParams}
@@ -52,8 +52,8 @@ export default function ToursSlider() {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+        <CarouselPrevious className="hidden md:block" />
+        <CarouselNext className="hidden md:block" />
       </Carousel>
     </Container>
   );

@@ -37,8 +37,8 @@ export async function sendEnquiryEmail(
 
     // Send email using Resend
     const { error } = await resend.emails.send({
-      from: process.env.RESEND_FROM_EMAIL!, // Replace with your verified domain
-      to: [`${process.env.RESEND_FROM_EMAIL!}`, "mohansky@gmail.com"], // Replace with your enquiry email
+      from: process.env.RESEND_FROM_EMAIL!,
+      to: [`${process.env.RESEND_FROM_EMAIL!}`, "mohansky@gmail.com"],
       subject: title ? `Enquiry: ${title}` : "New Enquiry",
       react: EnquiryEmail({
         title,

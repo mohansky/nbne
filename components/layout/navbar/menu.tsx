@@ -33,7 +33,7 @@ export default function Menu() {
     <>
       <div
         className={
-          "fixed top-0 left-0 right-0 z-30 bg-background/80 backdrop-blur" +
+          "fixed max-w-[100vw] top-0 left-0 right-0 z-30 bg-background/80 backdrop-blur" +
           (toHide && "py-0 h-0 hidden")
         }
       >

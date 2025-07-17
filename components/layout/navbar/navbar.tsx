@@ -22,12 +22,9 @@ export default function Navbar() {
           if (!item.children)
             return (
               <NavigationMenuItem key={item.id} className="bg-transparent">
-                <Link
-                  href={item.href} 
-                  passHref
-                  title={item.title}
-                >
-                  <NavigationMenuLink
+                <NavigationMenuLink asChild>
+                  <Link
+                    href={item.href}
                     className={cn(
                       navigationMenuTriggerStyle(),
                       "bg-transparent uppercase"
@@ -35,31 +32,32 @@ export default function Navbar() {
                     title={item.title}
                   >
                     {item.title}
-                  </NavigationMenuLink>
-                </Link>
+                  </Link>
+                </NavigationMenuLink>
               </NavigationMenuItem>
             );
-          {
-            return (
-              <NavigationMenuItem key={item.id}>
-                <NavigationMenuTrigger className="uppercase" title={item.title}>
-                  {item.title}
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <ul className="w-72">
-                    {item.children.map((item) => (
+          
+          return (
+            <NavigationMenuItem key={item.id}>
+              <NavigationMenuTrigger className="uppercase" title={item.title}>
+                {item.title}
+              </NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <ul className="w-72">
+                  {item.children.map((childItem) => (
+                    childItem.href ? (
                       <ListItem
                         className="uppercase"
-                        key={item.title}
-                        title={item.title}
-                        href={item.href}
+                        key={childItem.title}
+                        title={childItem.title}
+                        href={childItem.href}
                       />
-                    ))}
-                  </ul>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-            );
-          }
+                    ) : null
+                  ))}
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+          );
         })}
       </NavigationMenuList>
       <ModeToggle />
@@ -69,25 +67,26 @@ export default function Navbar() {
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<"a"> & { href: string }
+>(({ className, title, children, href, ...props }, ref) => {
   return (
     <li>
-      <NavigationMenuLink asChild title={title}>
-        <a
+      <NavigationMenuLink asChild>
+        <Link
+          href={href}
           ref={ref}
           className={cn(
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
             className
           )}
-          {...props}
           title={title}
+          {...props}
         >
           <div className="text-sm font-medium leading-none">{title}</div>
           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
             {children}
           </p>
-        </a>
+        </Link>
       </NavigationMenuLink>
     </li>
   );

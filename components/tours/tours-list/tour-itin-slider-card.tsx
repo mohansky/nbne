@@ -5,6 +5,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 // import { Heading } from "@/components/styledcomps/heading";
 import { Tours } from "@/.velite";
 import R2Image from "@/components/styledcomps/R2Image";
+import { Card } from "@/components/ui/card";
 
 export default function TourSliderCard({
   bg_image,
@@ -14,11 +15,11 @@ export default function TourSliderCard({
   cat,
 }: Tours) {
   return (
-    <div className="relative mx-1">
+    <Card className="relative group rounded-lg overflow-hidden">
       <Link href={`tours/${slug}`} title={title}>
         <AspectRatio ratio={16 / 9}>
           <R2Image
-            className="w-full object-cover"
+            className=""
             src={bg_image!}
             width={720}
             height={480}
@@ -30,12 +31,16 @@ export default function TourSliderCard({
           <p className="absolute top-0 end-0 text-white text-xs bg-primary text-center px-3 py-1">
             {cat}
           </p>
-          <div className="absolute left-2 bottom-10 translate-y-5 opacity-90 hover:bg-primary p-2">
-            <h5 className="font-bold text-white [text-shadow:_1px_1px_rgb(0_0_0_/_100%)]">{title}</h5>
-            <h6 className="font-light text-xs text-white [text-shadow:_1px_1px_rgb(0_0_0_/_100%)]">{subtitle}</h6>
+          <div className="absolute left-2 bottom-10 translate-y-5 opacity-90 group-hover:bg-primary ease-in-out duration-300 p-2">
+            <h5 className="font-bold text-white [text-shadow:_1px_1px_rgb(0_0_0_/_100%)]">
+              {title}
+            </h5>
+            <h6 className="font-light text-xs text-white [text-shadow:_1px_1px_rgb(0_0_0_/_100%)]">
+              {subtitle}
+            </h6>
           </div>
         </div>
       </Link>
-    </div>
+    </Card>
   );
 }

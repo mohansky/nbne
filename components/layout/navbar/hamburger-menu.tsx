@@ -1,5 +1,4 @@
-import React from "react";
-// import { TextAlignJustifyIcon } from "@radix-ui/react-icons";
+import React from "react"; 
 import { AlignJustify } from 'lucide-react';
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import MenuItems from "@/data/menu.json";
@@ -42,38 +41,41 @@ export default function HamburgerMenu() {
                   if (!item.children)
                     return (
                       <NavigationMenuItem key={item.id} className="my-5">
-                        <Link href={item.href} passHref title={item.title}>
-                          <NavigationMenuLink
+                        <NavigationMenuLink asChild>
+                          <Link 
+                            href={item.href} 
+                            title={item.title}
                             className={navigationMenuTriggerStyle()}
                           >
                             <SheetTrigger>{item.title}</SheetTrigger>
-                          </NavigationMenuLink>
-                        </Link>
+                          </Link>
+                        </NavigationMenuLink>
                       </NavigationMenuItem>
                     );
-                  {
-                    return (
-                      <NavigationMenuItem key={item.id} className="my-5">
-                        <Accordion type="single" key={item.id} collapsible>
-                          <AccordionItem value="item-1" className="border-b-0">
-                            <AccordionTrigger className="justify-center hover:no-underline">
-                              {item.title}
-                            </AccordionTrigger>
-                            <AccordionContent>
-                              {item.children.map((item) => (
+                  
+                  return (
+                    <NavigationMenuItem key={item.id} className="my-5">
+                      <Accordion type="single" key={item.id} collapsible>
+                        <AccordionItem value="item-1" className="border-b-0">
+                          <AccordionTrigger className="justify-center hover:no-underline">
+                            {item.title}
+                          </AccordionTrigger>
+                          <AccordionContent>
+                            {item.children.map((childItem) => (
+                              childItem.href ? (
                                 <ListItem
-                                  key={item.title}
-                                  title={item.title}
-                                  href={item.href}
+                                  key={childItem.title}
+                                  title={childItem.title}
+                                  href={childItem.href}
                                 />
-                              ))}
-                            </AccordionContent>
-                          </AccordionItem>
-                        </Accordion>
-                        <NavigationMenuContent></NavigationMenuContent>
-                      </NavigationMenuItem>
-                    );
-                  }
+                              ) : null
+                            ))}
+                          </AccordionContent>
+                        </AccordionItem>
+                      </Accordion>
+                      <NavigationMenuContent></NavigationMenuContent>
+                    </NavigationMenuItem>
+                  );
                 })}
               </NavigationMenuList>
             </NavigationMenu>
@@ -87,26 +89,28 @@ export default function HamburgerMenu() {
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<"a"> & { href: string }
+>(({ className, title, children, href, ...props }, ref) => {
   return (
     <li>
       <NavigationMenuLink asChild>
-        <a
+        <Link
+          href={href}
           ref={ref}
           className={cn(
-            "block w-full px-20 py-3  select-none space-y-1 rounded-md leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            "block w-full px-20 py-3 select-none space-y-1 rounded-md leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
             className
           )}
+          title={title}
           {...props}
         >
           <div className="text-sm w-44 font-medium leading-none text-center">
             {title}
           </div>
-          <p className=" line-clamp-2 text-sm leading-snug text-muted-foreground ">
+          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
             {children}
           </p>
-        </a>
+        </Link>
       </NavigationMenuLink>
     </li>
   );
