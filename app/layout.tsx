@@ -107,11 +107,7 @@ export default function RootLayout({
               dangerouslySetInnerHTML={{
                 __html: JSON.stringify([organizationSchema, websiteSchema]),
               }}
-            />
-            {/* <script
-              type="application/ld+json"
-              dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            /> */}
+            /> 
           </TooltipProvider>
         </ThemeProvider>
       </body>

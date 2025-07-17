@@ -1,8 +1,7 @@
-import Image, { StaticImageData } from "next/image";
-import { imgblurDataURL } from "@/lib/constants";
+import R2Image from "../styledcomps/R2Image";
 
 interface PostImageProps {
-  src: string | StaticImageData;
+  src: string;
   title?: string;
   width?: number;
   height?: number;
@@ -17,15 +16,12 @@ export default function PostImage({
   return (
     <>
       {src ? (
-        <Image
+        <R2Image
           src={src}
           alt={`Image for ${title}`}
-          title={`Image for ${title}`}
           className="w-full mx-auto my-10" //max-h-96
           width={width}
           height={height}
-          placeholder="blur"
-          blurDataURL={imgblurDataURL}
         />
       ) : null}
     </>

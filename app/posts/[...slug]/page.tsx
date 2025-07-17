@@ -81,6 +81,7 @@ export default async function TourPage({ params }: Props) {
                 author={post.author}
                 date={post.date}
                 body={post.body}
+                gallery={post.gallery}
               />
             )}
             {post.body && <MDXContent code={post.body} />}

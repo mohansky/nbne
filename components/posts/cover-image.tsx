@@ -1,10 +1,8 @@
-import Image from "next/image";
-import type { StaticImageData } from "next/image";
-import { imgblurDataURL } from "@/lib/constants";
 import { Skeleton } from "../ui/skeleton";
+import R2Image from "../styledcomps/R2Image";
 
 interface CoverImageProps {
-  src: string | StaticImageData;
+  src: string;
   title?: string;
   width?: number;
   height?: number;
@@ -19,15 +17,12 @@ export default function CoverImage({
   return (
     <>
       {src ? (
-        <Image
+        <R2Image
           src={src}
           alt={`Cover Image for ${title}`}
-          title={`Cover Image for ${title}`}
           className="max-h-72 object-cover rounded-t-md"
           width={width}
           height={height}
-          placeholder="blur"
-          blurDataURL={imgblurDataURL}
         />
       ) : (
         <Skeleton className="max-h-72 w-full" />

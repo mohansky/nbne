@@ -1,4 +1,3 @@
-import Image from "next/image";
 import * as runtime from "react/jsx-runtime";
 import { H1 } from "../ui/h1";
 import { H2 } from "../ui/h2";
@@ -8,6 +7,7 @@ import { H5 } from "../ui/h5";
 import { H6 } from "../ui/h6";
 import { P } from "../ui/p";
 import { ListItem, OrderedList, UnorderedList } from "../ui/lists";
+import R2Image from "../styledcomps/R2Image";
 
 const useMDXComponent = (code: string) => {
   const fn = new Function(code);
@@ -15,7 +15,7 @@ const useMDXComponent = (code: string) => {
 };
 
 const components = {
-  Image,
+  R2Image,
   h1: H1,
   h2: H2,
   h3: H3,
