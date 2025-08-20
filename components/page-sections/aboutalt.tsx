@@ -18,7 +18,7 @@ export default function AboutAlt() {
     >
       <div className="">
         <VideoPlayer
-          src="https://stream.mux.com/DS00Spx1CV902MCtPj5WknGlR102V5HFkDe/high.mp4"
+          src="https://pub-3d943afeed9643318d31712e02ebf613.r2.dev/North-by-Northeast-journeys.mp4"
           className="z-0 object-cover object-center"
         />
 
