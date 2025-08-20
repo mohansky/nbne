@@ -13,7 +13,7 @@ import {
 
 export default function TourCardBody({ tour }: { tour: Tours }) {
   return (
-    <div className="flex flex-col justify-between gap-2">
+    <div className="flex flex-col justify-between py-3">
       <Link href={`/tours/${tour.slug}`} title={tour.title}>
         <Tooltip>
           <TooltipTrigger
@@ -25,7 +25,7 @@ export default function TourCardBody({ tour }: { tour: Tours }) {
             }
           >
             <Heading
-              className="text-muted-foreground mb-1 text-left text-balance line-clamp-2 font-bold group-hover:text-primary"
+              className="text-muted-foreground mb-0 text-left text-balance line-clamp-2 font-bold group-hover:text-primary"
               size="xs"
             >
               {tour.title}
@@ -36,7 +36,7 @@ export default function TourCardBody({ tour }: { tour: Tours }) {
           </TooltipContent>
         </Tooltip>
         <Heading
-          className="text-muted-foreground leading-4 mb-3"
+          className="text-muted-foreground leading-4 mb-4"
           size="xxs"
           fontweight="medium"
           fontstyle="sans"
@@ -44,7 +44,7 @@ export default function TourCardBody({ tour }: { tour: Tours }) {
           {tour.subtitle}
         </Heading>
       </Link>
-      <div className="flex flex-row lg:flex-col justify-between gap-4 lg:gap-8 my-auto">
+      <div className="flex flex-row lg:flex-col justify-between gap-4">
         <div className="flex">
           <Icon
             className="my-1 p-2 bg-muted-foreground/20 group-hover:text-primary rounded-lg"
