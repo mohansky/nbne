@@ -1,21 +1,14 @@
+"use client";
 import {
   MediaController,
-//   MediaControlBar,
-//   MediaTimeRange,
-//   MediaTimeDisplay,
-//   MediaVolumeRange,
-//   MediaPlayButton,
-//   MediaSeekBackwardButton,
-//   MediaSeekForwardButton,
-//   MediaMuteButton,
 } from "media-chrome/react";
 import { cn } from "@/lib/utils";
+import { useEffect, useRef } from "react";
 
 interface VideoPlayerProps {
   src: string;
   muted?: boolean;
   className?: string;
- 
 }
 
 export default function VideoPlayer({
@@ -24,18 +17,37 @@ export default function VideoPlayer({
   muted = true,
   ...props
 }: VideoPlayerProps) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    // Ensure video attributes are set after component mounts
+    if (videoRef.current) {
+      videoRef.current.tabIndex = -1;
+      // Try to play the video manually
+      videoRef.current.play().catch((err) => {
+        console.log("Video autoplay prevented:", err);
+      });
+    }
+  }, []);
+
   return (
-    <MediaController className={cn(className)} {...props}>
-      <video slot="media" src={src} preload="auto" muted={muted} crossOrigin="" autoPlay loop/>
-      {/* <MediaControlBar>
-        <MediaPlayButton></MediaPlayButton>
-        <MediaSeekBackwardButton></MediaSeekBackwardButton>
-        <MediaSeekForwardButton></MediaSeekForwardButton>
-        <MediaTimeRange></MediaTimeRange>
-        <MediaTimeDisplay showDuration></MediaTimeDisplay>
-        <MediaMuteButton></MediaMuteButton>
-        <MediaVolumeRange></MediaVolumeRange>
-      </MediaControlBar> */}
+    <MediaController 
+      className={cn(className)} 
+      suppressHydrationWarning={true}
+      {...props}
+    >
+      <video 
+        ref={videoRef}
+        slot="media" 
+        src={src} 
+        preload="auto" 
+        muted={muted} 
+        autoPlay 
+        loop
+        tabIndex={-1}
+        suppressHydrationWarning={true}
+        playsInline
+      />
     </MediaController>
   );
 }
